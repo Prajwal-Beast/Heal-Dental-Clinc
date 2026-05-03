@@ -28,3 +28,14 @@
 .gal-sm img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
 .gal-sm:hover img { transform: scale(1.05); }
 .gal-cap { position: absolute; bottom: 16px; left: 16px; font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(255,255,255,0.85); background: rgba(12,26,46,0.55); backdrop-filter: blur(8px); padding: 5px 14px; border-radius: 999px; }
+.gal-main a, .gal-sm a { display: block; width: 100%; height: 100%; }
+
+/* ── ABOUT STATS STRIP ────────────────────────────── */
+.about-stats-strip { background: var(--ink2); padding: 80px 52px; }
+.about-stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(184,150,90,0.12); max-width: 900px; margin: 0 auto; border: 1px solid rgba(184,150,90,0.12); }
+.about-stat-item { text-align: center; padding: 48px 24px; background: var(--ink2); position: relative; overflow: hidden; }
+.about-stat-item::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-l)); transform: scaleX(0); transform-origin: center; transition: transform 0.5s var(--ease); }
+.about-stat-item:hover::after { transform: scaleX(1); }
+.about-stat-number { font-family: var(--serif); font-size: clamp(48px, 5.5vw, 76px); font-weight: 300; color: var(--white); line-height: 1; display: flex; align-items: baseline; justify-content: center; gap: 2px; }
+.about-stat-sfx { font-size: 0.45em; color: var(--gold); font-style: italic; }
+.about-stat-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-top: 14px; }

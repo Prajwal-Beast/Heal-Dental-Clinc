@@ -1,6 +1,10 @@
 /* ── NAV ────────────────────────────────────────── */
 .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 26px 52px; display: flex; align-items: center; justify-content: space-between; transition: background 0.5s var(--ease), padding 0.4s, border-color 0.4s; border-bottom: 1px solid transparent; }
-.nav.scrolled { background: rgba(12,26,46,0.97); backdrop-filter: blur(18px); padding: 16px 52px; border-bottom-color: rgba(184,150,90,0.18); }
+.nav.scrolled { background: rgba(255,255,255,0.97); backdrop-filter: blur(18px); padding: 16px 52px; border-bottom-color: rgba(184,150,90,0.18); box-shadow: 0 4px 24px rgba(12,26,46,0.08); }
+.nav.scrolled .logo-name { color: var(--ink); }
+.nav.scrolled .nav-links a { color: rgba(12,26,46,0.55); }
+.nav.scrolled .nav-links a:hover { color: var(--gold); }
+.nav.scrolled .hamburger span { background: var(--ink); }
 .logo-wrap { display: flex; align-items: center; gap: 14px; }
 .logo-circle { width: 50px; height: 50px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 1.5px solid rgba(184,150,90,0.4); background: var(--ink2); }
 .logo-circle img { width: 100%; height: 100%; object-fit: cover; }

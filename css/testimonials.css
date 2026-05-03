@@ -13,8 +13,14 @@
 .btn-outline-gold { display: inline-block; border: 1px solid rgba(184,150,90,0.38); color: var(--gold-l); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500; padding: 13px 26px; border-radius: 999px; transition: all 0.3s; }
 .btn-outline-gold:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
 
-.reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; max-width: 1240px; margin: 0 auto; }
-.review-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(184,150,90,0.1); border-radius: 3px; padding: 34px 32px; transition: border-color 0.4s, background 0.4s, transform 0.4s var(--ease); }
+/* ── SWIPER CAROUSEL ──────────────────────────────── */
+.testimonials-swiper { max-width: 1240px; margin: 0 auto; overflow: hidden; padding-bottom: 16px; }
+.testimonials-swiper .swiper-slide { height: auto; display: flex; }
+.testimonials-pagination { text-align: center; margin-top: 36px; }
+.testimonials-pagination .swiper-pagination-bullet { width: 8px; height: 8px; background: rgba(184,150,90,0.3); opacity: 1; margin: 0 4px; transition: background 0.3s, transform 0.3s; }
+.testimonials-pagination .swiper-pagination-bullet-active { background: var(--gold); transform: scale(1.3); }
+
+.review-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(184,150,90,0.1); border-radius: 12px; padding: 34px 32px; transition: border-color 0.4s, background 0.4s, transform 0.4s var(--ease); display: flex; flex-direction: column; width: 100%; }
 .review-card:hover { border-color: rgba(184,150,90,0.28); background: rgba(255,255,255,0.07); transform: translateY(-4px); }
 .review-top { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
 .reviewer-avatar { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--white); }
@@ -22,7 +28,7 @@
 .reviewer-name { font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--white); line-height: 1.2; }
 .review-date { font-size: 10px; color: var(--muted); letter-spacing: 0.06em; margin-top: 3px; }
 .review-stars { font-size: 13px; letter-spacing: 2px; color: #FBBC04; margin-bottom: 14px; }
-.review-text { font-size: 13.5px; line-height: 1.78; color: rgba(255,255,255,0.52); font-weight: 300; font-style: italic; }
+.review-text { font-size: 13.5px; line-height: 1.78; color: rgba(255,255,255,0.52); font-weight: 300; font-style: italic; flex: 1; }
 .review-g-mark { display: flex; align-items: center; gap: 6px; margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(184,150,90,0.08); }
 .review-g-mark svg { width: 14px; height: 14px; flex-shrink: 0; }
 .review-g-mark span { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }

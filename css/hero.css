@@ -38,6 +38,14 @@
   50%      { opacity: 0.6; transform: scale(1.8); }
 }
 
+/* ── TRUST BADGE ─────────────────────────────────── */
+.hero-trust-badge { position: absolute; top: 96px; right: 52px; z-index: 10; display: flex; align-items: center; gap: 10px; background: rgba(12,26,46,0.6); backdrop-filter: blur(14px); border: 1px solid rgba(184,150,90,0.28); border-radius: 999px; padding: 10px 20px; animation: heroBadgePulse 3.5s ease-in-out infinite; }
+.hero-trust-stars { color: #FBBC04; font-size: 12px; letter-spacing: 2px; }
+.hero-trust-text { font-size: 11px; color: rgba(255,255,255,0.75); font-weight: 300; }
+.hero-trust-text strong { color: var(--gold-l); font-weight: 500; }
+@keyframes heroBadgePulse { 0%,100%{box-shadow:0 0 0 0 rgba(184,150,90,0)} 50%{box-shadow:0 0 0 8px rgba(184,150,90,0.08)} }
+@media (max-width: 768px) { .hero-trust-badge { top: 80px; right: 24px; padding: 8px 14px; } .hero-trust-text { font-size: 10px; } }
+
 /* ── HERO BODY ───────────────────────────────────── */
 .hero-body { position: relative; z-index: 10; padding: 0 52px 88px; display: grid; grid-template-columns: 1fr 1fr; align-items: flex-end; gap: 48px; }
 .hero-tag { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
