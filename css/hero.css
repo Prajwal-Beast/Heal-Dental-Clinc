@@ -1,0 +1,69 @@
+/* ── HERO ────────────────────────────────────────── */
+.hero { position: relative; height: 100vh; min-height: 680px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; background: var(--ink); }
+.hero-bg { position: absolute; inset: 0; background: url('../storefront.webp') center/cover no-repeat; will-change: transform; }
+.hero-bg-fallback { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat; z-index: -1; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(12,26,46,0.22) 0%, rgba(12,26,46,0.55) 45%, rgba(12,26,46,0.95) 100%); }
+
+/* ── FLOATING TOOTH ──────────────────────────────── */
+.hero-float { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+.tooth-icon { position: absolute; opacity: 0; animation: toothFloat 8s ease-in-out infinite; }
+.tooth-icon svg { fill: rgba(184,150,90,0.12); }
+.tooth-icon:nth-child(1) { top: 18%; right: 12%; width: 52px; animation-delay: 0s; }
+.tooth-icon:nth-child(2) { top: 35%; right: 28%; width: 32px; animation-delay: 2.4s; animation-duration: 10s; }
+.tooth-icon:nth-child(3) { top: 58%; right: 8%;  width: 22px; animation-delay: 4.8s; animation-duration: 9s; }
+.tooth-icon:nth-child(4) { top: 14%; left: 8%;   width: 38px; animation-delay: 1.2s; animation-duration: 11s; }
+.tooth-icon:nth-child(5) { top: 70%; left: 18%;  width: 24px; animation-delay: 3.6s; animation-duration: 7s; }
+@keyframes toothFloat {
+  0%   { opacity: 0; transform: translateY(20px) rotate(-8deg); }
+  15%  { opacity: 1; }
+  50%  { transform: translateY(-18px) rotate(4deg); }
+  85%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-30px) rotate(-6deg); }
+}
+
+/* ── SPARKLE DOTS ────────────────────────────────── */
+.sparkle-field { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.sp { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: var(--gold-l); animation: sparkleAnim 4s ease-in-out infinite; }
+.sp:nth-child(1) { top: 22%; left: 45%; animation-delay: 0s; }
+.sp:nth-child(2) { top: 48%; left: 72%; animation-delay: 0.8s; }
+.sp:nth-child(3) { top: 31%; left: 18%; animation-delay: 1.6s; }
+.sp:nth-child(4) { top: 65%; left: 55%; animation-delay: 2.4s; }
+.sp:nth-child(5) { top: 19%; left: 62%; animation-delay: 3.2s; }
+.sp:nth-child(6) { top: 74%; left: 35%; animation-delay: 0.4s; }
+.sp:nth-child(7) { top: 40%; left: 88%; animation-delay: 1.2s; }
+.sp:nth-child(8) { top: 55%; left: 10%; animation-delay: 2s; }
+@keyframes sparkleAnim {
+  0%,100% { opacity: 0; transform: scale(0); }
+  30%,70% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.6; transform: scale(1.8); }
+}
+
+/* ── HERO BODY ───────────────────────────────────── */
+.hero-body { position: relative; z-index: 10; padding: 0 52px 88px; display: grid; grid-template-columns: 1fr 1fr; align-items: flex-end; gap: 48px; }
+.hero-tag { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+.hero-tag-line { width: 36px; height: 1px; background: var(--gold); }
+.hero-h1 { font-family: var(--serif); font-size: clamp(56px, 7.8vw, 110px); font-weight: 300; line-height: 0.95; letter-spacing: -0.025em; color: var(--white); }
+.hero-h1 em { font-style: italic; color: var(--gold-l); }
+.hero-right { display: flex; flex-direction: column; align-items: flex-end; gap: 28px; }
+.hero-desc { max-width: 340px; text-align: right; font-size: 15px; line-height: 1.84; color: rgba(255,255,255,0.52); font-weight: 300; }
+.hero-btns { display: flex; align-items: center; gap: 16px; }
+.btn-gold { display: inline-block; background: var(--gold); color: var(--ink); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 600; padding: 15px 34px; border-radius: 999px; transition: background 0.3s, transform 0.2s, box-shadow 0.3s; position: relative; overflow: hidden; }
+.btn-gold::after { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: rgba(255,255,255,0.25); border-radius: 50%; transform: translate(-50%,-50%); transition: width 0.4s, height 0.4s; }
+.btn-gold:hover { background: var(--gold-l); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(184,150,90,0.35); }
+.btn-gold:hover::after { width: 200px; height: 200px; }
+.btn-outline { display: inline-block; border: 1px solid rgba(184,150,90,0.45); color: var(--gold-l); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500; padding: 14px 26px; border-radius: 999px; transition: border-color 0.3s, color 0.3s, background 0.3s; }
+.btn-outline:hover { border-color: var(--gold-l); color: var(--white); background: rgba(184,150,90,0.12); }
+.scroll-hint { display: flex; align-items: center; gap: 12px; font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+.scroll-line { width: 36px; height: 1px; background: rgba(184,150,90,0.4); position: relative; overflow: hidden; }
+.scroll-line::after { content: ''; position: absolute; inset: 0; background: var(--gold); transform: translateX(-100%); animation: sweep 2.6s ease-in-out infinite; }
+@keyframes sweep { 0%{transform:translateX(-100%)} 55%{transform:translateX(100%)} 100%{transform:translateX(100%)} }
+
+/* ── STAT BAR ────────────────────────────────────── */
+.stat-bar { background: var(--ink2); border-top: 1px solid rgba(184,150,90,0.14); display: grid; grid-template-columns: repeat(4,1fr); }
+.stat-cell { padding: 40px 44px; border-right: 1px solid rgba(184,150,90,0.09); display: flex; flex-direction: column; gap: 8px; position: relative; overflow: hidden; }
+.stat-cell::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-l)); transform: scaleX(0); transition: transform 0.5s var(--ease); }
+.stat-cell:hover::after { transform: scaleX(1); }
+.stat-cell:last-child { border-right: none; }
+.stat-n { font-family: var(--serif); font-size: 54px; font-weight: 300; color: var(--white); line-height: 1; }
+.stat-n .sfx { color: var(--gold); font-size: 26px; }
+.stat-lbl { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }

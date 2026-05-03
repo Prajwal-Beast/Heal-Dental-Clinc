@@ -1,0 +1,41 @@
+/* ── BOOKING ──────────────────────────────────────── */
+.booking { background: var(--cream); padding: 128px 52px; }
+.booking-grid { display: grid; grid-template-columns: 1fr 1.45fr; gap: 56px; margin-top: 64px; align-items: start; max-width: 1240px; margin: 64px auto 0; }
+.form-wrap { background: var(--white); padding: 52px 46px; border: 1px solid rgba(184,150,90,0.16); border-radius: 3px; position: relative; }
+.form-wrap::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-l)); border-radius: 3px 3px 0 0; }
+.form-h { font-family: var(--serif); font-size: 36px; font-weight: 300; color: var(--ink); line-height: 1.2; margin-bottom: 38px; }
+.form-h em { font-style: italic; color: var(--gold); }
+.f-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 26px; }
+.f-label { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.f-in { background: transparent; border: none; border-bottom: 1px solid rgba(184,150,90,0.22); color: var(--ink); font-family: var(--sans); font-size: 14px; padding: 10px 0; outline: none; transition: border-color 0.3s; appearance: none; -webkit-appearance: none; width: 100%; }
+.f-in::placeholder { color: var(--muted); }
+.f-in:focus { border-bottom-color: var(--gold); }
+.f-submit { width: 100%; border: none; background: var(--ink); color: var(--gold); font-family: var(--sans); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; font-weight: 600; padding: 18px 32px; border-radius: 999px; cursor: pointer; transition: background 0.3s, color 0.3s; margin-top: 10px; }
+.f-submit:hover { background: var(--gold); color: var(--ink); }
+.f-note { margin-top: 14px; text-align: center; font-size: 11px; color: var(--muted); letter-spacing: 0.03em; }
+.f-note b { color: var(--gold); font-weight: 500; }
+.cal-wrap { border-radius: 3px; overflow: hidden; border: 1px solid rgba(184,150,90,0.14); box-shadow: 0 28px 72px rgba(12,26,46,0.08); }
+.cal-note { margin-top: 14px; text-align: center; font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+
+/* ── CONTACT ──────────────────────────────────────── */
+.contact { background: var(--cream); padding: 128px 52px; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.35fr; gap: 80px; margin-top: 64px; align-items: center; max-width: 1240px; margin: 64px auto 0; }
+.c-item { display: flex; gap: 20px; align-items: flex-start; padding: 26px 0; border-bottom: 1px solid rgba(184,150,90,0.14); }
+.c-item:first-child { padding-top: 0; }
+.c-icon { width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(184,150,90,0.25); display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; transition: background 0.3s, border-color 0.3s; }
+.c-item:hover .c-icon { background: rgba(184,150,90,0.1); border-color: var(--gold); }
+.c-lbl { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 7px; }
+.c-val { font-family: var(--serif); font-size: 21px; font-weight: 400; color: var(--ink); line-height: 1.4; }
+.c-val a { color: inherit; transition: color 0.3s; }
+.c-val a:hover { color: var(--gold); }
+.map-box { height: 460px; border-radius: 3px; overflow: hidden; border: 1px solid rgba(184,150,90,0.15); box-shadow: 0 24px 60px rgba(12,26,46,0.08); }
+
+/* ── FOOTER ───────────────────────────────────────── */
+.footer { background: #070F1C; padding: 64px 52px 40px; border-top: 1px solid rgba(184,150,90,0.12); }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 40px; border-bottom: 1px solid rgba(184,150,90,0.08); gap: 32px; flex-wrap: wrap; }
+.footer-links { display: flex; gap: 32px; list-style: none; flex-wrap: wrap; }
+.footer-links a { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.32); transition: color 0.3s; }
+.footer-links a:hover { color: var(--gold-l); }
+.footer-bottom { padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.22); letter-spacing: 0.04em; }
+.footer-stars { font-size: 13px; letter-spacing: 3px; color: #FBBC04; }
