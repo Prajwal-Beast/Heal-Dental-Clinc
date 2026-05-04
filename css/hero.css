@@ -114,8 +114,16 @@
 /* RIGHT — full-bleed image */
 .hero-right {
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* allow float cards to extend left */
   background: var(--sky-100);
+}
+
+/* Image stays clipped, cards can overflow */
+.hero-img-frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
 }
 
 .hero-img {
@@ -133,6 +141,7 @@
   border-radius: 14px;
   box-shadow: var(--shadow-md);
   padding: 16px 20px;
+  z-index: 2;
 }
 .hero-float-card--rating {
   bottom: 48px;
