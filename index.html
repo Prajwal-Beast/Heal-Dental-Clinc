@@ -6,18 +6,13 @@
   <title>Heal Dental Clinic | Tokha, Kathmandu</title>
   <meta name="description" content="Heal Dental Clinic Pvt. Ltd. — Kathmandu's trusted dental clinic on Tokha Road. Comprehensive care, 5.0 Google rating. Call 976-5051614."/>
 
-  <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"/>
 
-  <!-- Brand fonts: Fraunces (display) · Plus Jakarta Sans (UI) · JetBrains Mono (eyebrow) -->
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"/>
-
-  <!-- Plugin CSS -->
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
 
-  <!-- Custom CSS -->
   <link rel="stylesheet" href="css/global.css"/>
   <link rel="stylesheet" href="css/header.css"/>
   <link rel="stylesheet" href="css/hero.css"/>
@@ -27,32 +22,568 @@
   <link rel="stylesheet" href="css/testimonials.css"/>
   <link rel="stylesheet" href="css/contact.css"/>
 
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
 </head>
 <body>
-  <div id="s-header"></div>
-  <div id="s-hero"></div>
-  <div id="s-about"></div>
-  <div id="s-services"></div>
-  <div id="s-team"></div>
-  <div id="s-testimonials"></div>
-  <div id="s-contact"></div>
 
-  <!-- WhatsApp Float -->
-  <a href="https://wa.me/9779765051614" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+<!-- ═══════════════════ MOBILE NAV ═══════════════════ -->
+<div class="mob-nav" id="mobNav">
+  <button class="mob-close" id="mobClose">&#10005;</button>
+  <a href="#home"     onclick="closeMob()">Home</a>
+  <a href="#about"    onclick="closeMob()">About</a>
+  <a href="#services" onclick="closeMob()">Services</a>
+  <a href="#team"     onclick="closeMob()">Team</a>
+  <a href="#reviews"  onclick="closeMob()">Reviews</a>
+  <a href="#booking"  onclick="closeMob()">Appointments</a>
+  <a href="tel:9765051614" class="mob-cta" onclick="closeMob()">Call 976&#8211;5051614</a>
+</div>
+
+<!-- ═══════════════════ NAV ═══════════════════ -->
+<nav class="nav" id="nav">
+  <a href="#home" class="logo-wrap">
+    <img src="logo.jpg" alt="Heal Dental Clinic" class="logo-img" onerror="this.style.display='none'"/>
+    <div class="logo-text">
+      <span class="logo-name">Heal</span>
+      <span class="logo-sub">Dental Clinic Pvt. Ltd.</span>
+    </div>
   </a>
 
-  <!-- Plugins -->
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 
-  <!-- Custom JS -->
-  <script src="js/nav.js"></script>
-  <script src="js/testimonials.js"></script>
-  <script src="js/contact.js"></script>
-  <script src="js/main.js"></script>
+  <div class="nav-right">
+    <a href="tel:9765051614" class="nav-phone">976&#8211;5051614</a>
+    <a href="#booking" class="btn-primary">Book Appointment</a>
+  </div>
+
+  <button class="hamburger" id="hamBtn" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero" id="home">
+  <!-- Left: copy -->
+  <div class="hero-left">
+    <div class="hero-tag" data-aos="fade-up">
+      <span class="hero-tag-dot"></span>
+      <span>Tokha Road &middot; Kathmandu</span>
+    </div>
+
+    <h1 class="hero-h1" data-aos="fade-up" data-aos-delay="80">
+      Exceptional<br><em>Dental</em> Care,<br>Close to Home.
+    </h1>
+
+    <p class="hero-lede" data-aos="fade-up" data-aos-delay="160">
+      Modern dentistry with a personal touch. From routine check-ups to complete smile transformations &mdash; we&rsquo;re here every day, 8&nbsp;AM to 8&nbsp;PM.
+    </p>
+
+    <div class="hero-btns" data-aos="fade-up" data-aos-delay="240">
+      <a href="#booking" class="btn-primary">Book a Visit &rarr;</a>
+      <a href="#services" class="btn-outline">Our Services</a>
+    </div>
+
+    <div class="hero-trust" data-aos="fade-up" data-aos-delay="320">
+      <div class="hero-trust-item">
+        <span class="trust-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span class="trust-lbl">5.0 Google Rating</span>
+      </div>
+      <span class="trust-sep">|</span>
+      <div class="hero-trust-item">
+        <strong class="trust-num">500+</strong>
+        <span class="trust-lbl">Happy Patients</span>
+      </div>
+      <span class="trust-sep">|</span>
+      <div class="hero-trust-item">
+        <strong class="trust-num">8+</strong>
+        <span class="trust-lbl">Years of Care</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: image full-bleed -->
+  <div class="hero-right">
+    <img
+      src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=900&q=85"
+      alt="Happy patient at Heal Dental Clinic"
+      class="hero-img"
+    />
+    <div class="hero-float-card hero-float-card--rating">
+      <span class="fc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <strong class="fc-num">5.0</strong>
+      <span class="fc-lbl">Google Rating</span>
+    </div>
+    <div class="hero-float-card hero-float-card--emergency">
+      <span class="fc-dot"></span>
+      <span class="fc-text">Same-day emergency slots</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ STAT BAR ═══════════════════ -->
+<div class="stat-bar">
+  <div class="stat-cell">
+    <div class="stat-n"><span class="counter" data-target="5" data-decimal="1">5.0</span><span class="sfx">&#9733;</span></div>
+    <div class="stat-lbl">Google Rating</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n"><span class="counter" data-target="500">500</span><span class="sfx">+</span></div>
+    <div class="stat-lbl">Happy Patients</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n"><span class="counter" data-target="8">8</span><span class="sfx">+</span></div>
+    <div class="stat-lbl">Years Serving Tokha</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n"><span class="counter" data-target="12">12</span><span class="sfx">+</span></div>
+    <div class="stat-lbl">Dental Specialties</div>
+  </div>
+</div>
+
+<!-- ═══════════════════ SERVICES ═══════════════════ -->
+<section class="services" id="services">
+  <div class="s-inner">
+    <div class="services-head">
+      <div data-aos="fade-right">
+        <span class="eyebrow">Our Services</span>
+        <h2 class="section-title">Treatments designed<br>around <em>you.</em></h2>
+      </div>
+      <p class="services-desc" data-aos="fade-left" data-aos-delay="80">
+        From routine cleaning to full-mouth rehabilitation &mdash; every treatment is planned with you, not just for you.
+      </p>
+    </div>
+
+    <div class="svc-grid">
+
+      <div class="svc-card" data-aos="fade-up" data-aos-delay="0">
+        <span class="svc-num">/ 01</span>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
+        <h3 class="svc-title">General Dentistry</h3>
+        <p class="svc-body">Routine cleanings, X-rays and preventive care. Your foundation for long-term oral health.</p>
+        <div class="svc-meta">
+          <span class="svc-time">30 &ndash; 60 MIN</span>
+          <span class="svc-price">From Rs.&nbsp;1,200</span>
+        </div>
+      </div>
+
+      <div class="svc-card" data-aos="fade-up" data-aos-delay="60">
+        <span class="svc-num">/ 02</span>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3 class="svc-title">Cosmetic Dentistry</h3>
+        <p class="svc-body">Veneers, whitening and edge contouring &mdash; designed in 3D, refined in person.</p>
+        <div class="svc-meta">
+          <span class="svc-time">45 &ndash; 90 MIN</span>
+          <span class="svc-price">From Rs.&nbsp;4,800</span>
+        </div>
+      </div>
+
+      <div class="svc-card" data-aos="fade-up" data-aos-delay="120">
+        <span class="svc-num">/ 03</span>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <h3 class="svc-title">Orthodontics</h3>
+        <p class="svc-body">Clear aligners and braces for a straight, confident smile at any age.</p>
+        <div class="svc-meta">
+          <span class="svc-time">Consultation</span>
+          <span class="svc-price">From Rs.&nbsp;3,500</span>
+        </div>
+      </div>
+
+      <div class="svc-card" data-aos="fade-up" data-aos-delay="0">
+        <span class="svc-num">/ 04</span>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12M12 12C12 12 7 9 7 4a5 5 0 0110 0c0 5-5 8-5 8z"/></svg>
+        </div>
+        <h3 class="svc-title">Dental Implants</h3>
+        <p class="svc-body">Permanent, natural-looking titanium implants. Preserves jaw structure, looks and feels real.</p>
+        <div class="svc-meta">
+          <span class="svc-time">2 &ndash; 3 HRS</span>
+          <span class="svc-price">From Rs.&nbsp;18,000</span>
+        </div>
+      </div>
+
+      <div class="svc-card" data-aos="fade-up" data-aos-delay="60">
+        <span class="svc-num">/ 05</span>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <h3 class="svc-title">Root Canal</h3>
+        <p class="svc-body">Precision nerve therapy with modern rotary tools &mdash; far more comfortable than you think.</p>
+        <div class="svc-meta">
+          <span class="svc-time">60 &ndash; 90 MIN</span>
+          <span class="svc-price">From Rs.&nbsp;3,200</span>
+        </div>
+      </div>
+
+      <div class="svc-card" data-aos="fade-up" data-aos-delay="120">
+        <span class="svc-num">/ 06</span>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3 class="svc-title">Pediatric Dentistry</h3>
+        <p class="svc-body">Gentle, friendly dental care for children from age three. Sealants and fluoride treatments.</p>
+        <div class="svc-meta">
+          <span class="svc-time">30 &ndash; 45 MIN</span>
+          <span class="svc-price">From Rs.&nbsp;800</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ ABOUT ═══════════════════ -->
+<section class="about" id="about">
+  <div class="about-inner s-inner">
+
+    <div class="about-imgs" data-aos="fade-right">
+      <div class="about-img-main">
+        <img src="storefront.webp" alt="Heal Dental Clinic storefront on Tokha Road"/>
+      </div>
+      <div class="about-img-grid">
+        <img src="interior.jpg" alt="Clinic reception interior"/>
+        <img src="staff.webp" alt="Heal Dental Clinic team"/>
+      </div>
+    </div>
+
+    <div class="about-text" data-aos="fade-left" data-aos-delay="100">
+      <span class="eyebrow">About Heal</span>
+      <h2 class="section-title">A modern clinic in<br>the heart of <em>Kathmandu.</em></h2>
+      <div class="rule"></div>
+      <p class="section-lede" style="margin-bottom:16px;">
+        Founded on the belief that dental care should be accessible, comfortable and exceptional.
+      </p>
+      <p class="about-body">
+        Located on Tokha Road, opposite Kumari Bank, Heal Dental Clinic combines modern clinical technology with genuine personal care. Every visit is planned around you &mdash; open every day, 8&nbsp;AM to 8&nbsp;PM.
+      </p>
+      <ul class="about-features">
+        <li>
+          <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div><strong>State-of-the-art equipment</strong><p>Digital X-rays, rotary endodontics and modern technology for precise, comfortable care.</p></div>
+        </li>
+        <li>
+          <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <div><strong>Open every day, 8 AM &ndash; 8 PM</strong><p>Same-day emergency slots reserved daily. You&rsquo;re never left without support.</p></div>
+        </li>
+        <li>
+          <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+          <div><strong>Transparent pricing</strong><p>Clear cost estimates before every procedure. No surprises, ever.</p></div>
+        </li>
+      </ul>
+      <a href="#booking" class="btn-primary">Book a Visit &rarr;</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ TEAM ═══════════════════ -->
+<section class="team" id="team">
+  <div class="s-inner">
+    <div class="team-head">
+      <div data-aos="fade-right">
+        <span class="eyebrow">Our Team</span>
+        <h2 class="section-title">The people behind<br>your <em>smile.</em></h2>
+      </div>
+      <p class="team-head-desc" data-aos="fade-left" data-aos-delay="80">
+        Experienced, compassionate dentists who listen before they treat.
+      </p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="team-photo-wrap">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=500&q=80" alt="Dr. Priya Sharma" class="team-photo"/>
+          <span class="team-badge">Lead Dentist</span>
+        </div>
+        <div class="team-body">
+          <div class="team-name">Dr. Priya Sharma</div>
+          <div class="team-role">BDS, MDS &mdash; Implantology</div>
+          <p class="team-bio">8+ years in implant dentistry and full-mouth rehabilitation. Trained at Kathmandu Medical College.</p>
+        </div>
+      </div>
+      <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="team-photo-wrap">
+          <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=500&q=80" alt="Dr. Rohan Thapa" class="team-photo"/>
+          <span class="team-badge">Orthodontist</span>
+        </div>
+        <div class="team-body">
+          <div class="team-name">Dr. Rohan Thapa</div>
+          <div class="team-role">BDS, MDS &mdash; Orthodontics</div>
+          <p class="team-bio">Specialist in clear aligners and cosmetic corrections. Known for meticulous precision.</p>
+        </div>
+      </div>
+      <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="team-photo-wrap">
+          <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=500&q=80" alt="Dr. Anisha Karki" class="team-photo"/>
+          <span class="team-badge">Pediatric Care</span>
+        </div>
+        <div class="team-body">
+          <div class="team-name">Dr. Anisha Karki</div>
+          <div class="team-role">BDS &mdash; Pediatric &amp; General</div>
+          <p class="team-bio">Gentle approach trusted by hundreds of Tokha families for children&rsquo;s dental care.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ REVIEWS ═══════════════════ -->
+<section class="reviews" id="reviews">
+  <div class="s-inner">
+    <div class="reviews-head">
+      <div data-aos="fade-right">
+        <span class="eyebrow">Google Reviews</span>
+        <h2 class="section-title">What our patients<br><em>say.</em></h2>
+      </div>
+      <div class="reviews-rating-badge" data-aos="fade-left" data-aos-delay="100">
+        <svg class="badge-google-logo" viewBox="0 0 48 48"><path fill="#4285F4" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/><path fill="#34A853" d="M6.3 14.7l7 5.1C15.1 15.6 19.2 13 24 13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 16.3 2 9.6 7.3 6.3 14.7z"/><path fill="#FBBC05" d="M24 46c5.5 0 10.5-1.8 14.4-5l-6.7-5.5C29.6 37 26.9 38 24 38c-6.1 0-10.8-4.1-11.8-9.5l-7 5.4C8.3 41.5 15.6 46 24 46z"/><path fill="#EA4335" d="M44.5 20H24v8.5h11.8c-.9 2.5-2.5 4.5-4.8 5.9l6.7 5.5C41.8 36.3 44.5 30.7 44.5 24c0-1.3-.2-2.7-.5-4z"/></svg>
+        <div class="badge-rating-content">
+          <div class="badge-stars-row">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="badge-score">5.0</div>
+          <div class="badge-count">Google rating &middot; Tokha</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="review-stars"><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span></div>
+        <p class="review-text">I was terrified of dentists before coming here. Dr. Priya was incredibly patient and explained everything step by step. My root canal was painless. Couldn&rsquo;t believe it.</p>
+        <div class="review-footer">
+          <div class="review-avatar">S</div>
+          <div><div class="review-name">Suman Shrestha</div><div class="review-date">April 2025</div></div>
+          <span class="review-google-badge">Google</span>
+        </div>
+      </div>
+      <div class="review-card" data-aos="fade-up" data-aos-delay="60">
+        <div class="review-stars"><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span></div>
+        <p class="review-text">Brought my 5-year-old for the first time. Dr. Anisha made the whole experience fun. My daughter actually asked to come back. That says everything.</p>
+        <div class="review-footer">
+          <div class="review-avatar">R</div>
+          <div><div class="review-name">Rekha Tamang</div><div class="review-date">March 2025</div></div>
+          <span class="review-google-badge">Google</span>
+        </div>
+      </div>
+      <div class="review-card" data-aos="fade-up" data-aos-delay="120">
+        <div class="review-stars"><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span></div>
+        <p class="review-text">Got braces consultation and the whole process was transparent from day one &mdash; costs, timeline, everything. Dr. Rohan has incredible attention to detail.</p>
+        <div class="review-footer">
+          <div class="review-avatar">B</div>
+          <div><div class="review-name">Bikram Gurung</div><div class="review-date">February 2025</div></div>
+          <span class="review-google-badge">Google</span>
+        </div>
+      </div>
+      <div class="review-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="review-stars"><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span></div>
+        <p class="review-text">Had an emergency on a Sunday morning. Called and got a same-day slot within the hour. The staff was calm, quick and professional. Absolute lifesavers.</p>
+        <div class="review-footer">
+          <div class="review-avatar">A</div>
+          <div><div class="review-name">Aarati Poudel</div><div class="review-date">January 2025</div></div>
+          <span class="review-google-badge">Google</span>
+        </div>
+      </div>
+      <div class="review-card" data-aos="fade-up" data-aos-delay="60">
+        <div class="review-stars"><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span></div>
+        <p class="review-text">The whitening treatment gave me results I honestly didn&rsquo;t expect. The clinic is spotless and modern. Felt like a premium experience at a very fair price.</p>
+        <div class="review-footer">
+          <div class="review-avatar">M</div>
+          <div><div class="review-name">Manisha Adhikari</div><div class="review-date">December 2024</div></div>
+          <span class="review-google-badge">Google</span>
+        </div>
+      </div>
+      <div class="review-card" data-aos="fade-up" data-aos-delay="120">
+        <div class="review-stars"><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span></div>
+        <p class="review-text">Got my implant done here after going to three other clinics for quotes. Heal was the most thorough and the results are flawless. Worth every rupee.</p>
+        <div class="review-footer">
+          <div class="review-avatar">P</div>
+          <div><div class="review-name">Prakash Bhandari</div><div class="review-date">November 2024</div></div>
+          <span class="review-google-badge">Google</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CTA STRIP ═══════════════════ -->
+<div class="cta-strip">
+  <div class="cta-strip-inner s-inner">
+    <div data-aos="fade-right">
+      <div class="cta-strip-title">Ready for a <em>healthier</em> smile?</div>
+      <p class="cta-strip-sub">Open every day &middot; 8:00 AM &ndash; 8:00 PM &middot; Same-day emergency slots</p>
+    </div>
+    <div class="cta-strip-btns" data-aos="fade-left" data-aos-delay="100">
+      <a href="#booking" class="btn-primary">Book a Visit &rarr;</a>
+      <a href="tel:9765051614" class="btn-outline-white">976&#8211;5051614</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ BOOKING ═══════════════════ -->
+<section class="booking" id="booking">
+  <div class="s-inner">
+    <div class="booking-head" data-aos="fade-up">
+      <span class="eyebrow">Appointments</span>
+      <h2 class="section-title">Book your <em>visit.</em></h2>
+    </div>
+    <div class="booking-grid">
+      <div class="form-wrap" data-aos="fade-right">
+        <form id="bookingForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">Full Name</label>
+              <input type="text" id="fname" name="name" placeholder="Your full name" required/>
+            </div>
+            <div class="form-group">
+              <label for="fphone">Phone</label>
+              <input type="tel" id="fphone" name="phone" placeholder="98XXXXXXXX" required/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="femail">Email</label>
+            <input type="email" id="femail" name="email" placeholder="you@example.com"/>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fservice">Service</label>
+              <select id="fservice" name="service">
+                <option value="">Select a service</option>
+                <option>General Dentistry</option>
+                <option>Cosmetic Dentistry</option>
+                <option>Orthodontics</option>
+                <option>Dental Implants</option>
+                <option>Root Canal Treatment</option>
+                <option>Pediatric Dentistry</option>
+                <option>Emergency Appointment</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="apptDate">Preferred Date</label>
+              <input type="text" id="apptDate" name="date" placeholder="Pick a date" readonly/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="fmsg">Message (optional)</label>
+            <textarea id="fmsg" name="message" placeholder="Any symptoms or questions..."></textarea>
+          </div>
+          <div class="form-submit-wrap">
+            <button type="submit" class="btn-primary">Send Request &rarr;</button>
+            <p class="form-note">We&rsquo;ll confirm within a few hours &mdash; or call 976&#8211;5051614 for same-day slots.</p>
+          </div>
+        </form>
+      </div>
+
+      <div class="contact-info" data-aos="fade-left" data-aos-delay="100" id="contact">
+        <div>
+          <div class="contact-info-title">You&rsquo;re in good hands.</div>
+          <p style="font-size:14px;color:var(--ink-700);line-height:1.7;margin-top:8px;">Walk in any day. Call ahead for same-day emergency slots.</p>
+        </div>
+        <div class="c-items">
+          <div class="c-item">
+            <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82 19.79 19.79 0 01.21 1.2 2 2 0 012.2 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.28 7.6a16 16 0 006.12 6.12l1.24-1.24a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
+            <div><span class="c-label">Phone</span><div class="c-val"><a href="tel:9765051614">976&#8211;5051614</a></div></div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><span class="c-label">Address</span><div class="c-val">Tokha Road (Opp. Kumari Bank)<br/>Kathmandu 44600</div></div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div><span class="c-label">Hours</span><div class="c-val">Every day &mdash; 8:00 AM to 8:00 PM</div></div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
+            <div><span class="c-label">WhatsApp</span><div class="c-val"><a href="https://wa.me/9779765051614" target="_blank" rel="noopener">Chat on WhatsApp</a></div></div>
+          </div>
+        </div>
+        <div class="map-box">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3531.5674695595636!2d85.33230491506174!3d27.746800282792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb194e6b3333c1%3A0x1b6d9f4d51c99d7!2sTokha%20Rd%2C%20Kathmandu!5e0!3m2!1sen!2snp!4v1620000000000!5m2!1sen!2snp" title="Heal Dental Clinic map" loading="lazy" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer class="footer">
+  <div class="s-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo-wrap">
+          <img src="logo.jpg" alt="Heal Dental Clinic" class="footer-logo-img"/>
+          <div>
+            <div class="footer-logo-name">Heal</div>
+            <span class="footer-logo-sub">Dental Clinic Pvt. Ltd.</span>
+          </div>
+        </div>
+        <p class="footer-tagline">Care that heals &mdash; for the whole family. Kathmandu&rsquo;s trusted dental clinic on Tokha Road, open every day.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#team">Our Team</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#booking">Book Appointment</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Treatments</h4>
+        <ul>
+          <li><a href="#services">General Dentistry</a></li>
+          <li><a href="#services">Cosmetic Dentistry</a></li>
+          <li><a href="#services">Orthodontics</a></li>
+          <li><a href="#services">Dental Implants</a></li>
+          <li><a href="#services">Root Canal</a></li>
+          <li><a href="#services">Pediatric Care</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <p>
+          Tokha Road (Opp. Kumari Bank)<br/>
+          Kathmandu 44600, Nepal<br/><br/>
+          <a href="tel:9765051614">976&#8211;5051614</a><br/>
+          <a href="https://wa.me/9779765051614">WhatsApp</a><br/><br/>
+          Every day &mdash; 8:00 AM to 8:00 PM
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Heal Dental Clinic Pvt. Ltd. &middot; Kathmandu, Nepal</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/9779765051614" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/testimonials.js"></script>
+<script src="js/contact.js"></script>
+<script src="js/main.js"></script>
+
 </body>
 </html>
