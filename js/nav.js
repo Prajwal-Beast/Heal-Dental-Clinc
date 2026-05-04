@@ -1,19 +1,22 @@
 function initNav() {
+  const nav = document.getElementById('nav');
+
   window.addEventListener('scroll', () => {
-    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+    nav.classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
 
-  const hamBtn = document.getElementById('hamBtn');
-  const mobNav = document.getElementById('mobNav');
-  hamBtn.addEventListener('click', () => {
-    hamBtn.classList.toggle('open');
-    mobNav.classList.toggle('open');
+  document.getElementById('hamBtn').addEventListener('click', () => {
+    document.getElementById('hamBtn').classList.toggle('open');
+    document.getElementById('mobNav').classList.toggle('open');
+    document.body.style.overflow =
+      document.getElementById('mobNav').classList.contains('open') ? 'hidden' : '';
   });
+
   document.getElementById('mobClose').addEventListener('click', closeMob);
 }
 
-/* Global so onclick="closeMob()" in header.html works after fetch-inject */
 function closeMob() {
   document.getElementById('hamBtn').classList.remove('open');
   document.getElementById('mobNav').classList.remove('open');
+  document.body.style.overflow = '';
 }

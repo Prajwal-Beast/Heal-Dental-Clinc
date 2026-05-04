@@ -9,44 +9,43 @@ async function loadSection(id, path) {
 const rv = (sel, vars, stagger) => {
   const els = document.querySelectorAll(sel);
   if (!els.length) return;
-  gsap.from(els, { ...vars, stagger: stagger || 0, scrollTrigger: { trigger: els[0], start: 'top 87%' } });
+  gsap.from(els, {
+    ...vars,
+    stagger: stagger || 0,
+    scrollTrigger: { trigger: els[0], start: 'top 88%' }
+  });
 };
 
 function initAnimations() {
-  // Parallax hero background
-  gsap.to('#heroBg', {
-    yPercent: 28, ease: 'none',
-    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
-  });
-
-  // Counter animation for stat bars
+  /* Counters */
   document.querySelectorAll('.counter').forEach(el => {
     const target = parseFloat(el.dataset.target);
     const dec    = parseInt(el.dataset.decimal || 0);
     ScrollTrigger.create({
       trigger: el, start: 'top 92%', once: true,
       onEnter: () => {
-        let start = 0;
+        let cur = 0;
         const step = () => {
-          start += (target - start) * 0.08 + 0.01;
-          el.textContent = start >= target - 0.05 ? target.toFixed(dec) : start.toFixed(dec);
-          if (start < target - 0.05) requestAnimationFrame(step);
+          cur += (target - cur) * 0.08 + 0.01;
+          el.textContent = cur >= target - 0.05
+            ? target.toFixed(dec)
+            : cur.toFixed(dec);
+          if (cur < target - 0.05) requestAnimationFrame(step);
         };
         requestAnimationFrame(step);
       }
     });
   });
 
-  rv('.stat-cell',               { opacity:0, y:36,  duration:0.85, ease:'power3.out' }, 0.1);
-  rv('.philosophy .inner > div', { opacity:0, y:40,  duration:1,    ease:'power3.out' }, 0.15);
-  rv('.phil-point',              { opacity:0, y:24,  duration:0.75, ease:'power3.out' }, 0.12);
-  rv('.phil-img-wrap',           { opacity:0, scale:0.96, duration:1.1, ease:'power3.out' }, 0.14);
-  rv('.gal-main',                { opacity:0, x:-52, duration:1,    ease:'power3.out' });
-  rv('.gal-sm',                  { opacity:0, x:52,  duration:1,    ease:'power3.out' }, 0.14);
-  rv('.team-card',               { opacity:0, y:44,  duration:0.9,  ease:'power3.out' }, 0.1);
-  rv('.reviews-rating-badge',    { opacity:0, x:-40, duration:1,    ease:'power3.out' });
-  rv('.c-item',                  { opacity:0, y:28,  duration:0.8,  ease:'power3.out' }, 0.1);
-  rv('.map-box',                 { opacity:0, x:52,  duration:1,    ease:'power3.out' });
+  /* Section reveals */
+  rv('.stat-cell',    { opacity: 0, y: 32,  duration: 0.8, ease: 'power3.out' }, 0.1);
+  rv('.svc-card',     { opacity: 0, y: 40,  duration: 0.8, ease: 'power3.out' }, 0.08);
+  rv('.team-card',    { opacity: 0, y: 44,  duration: 0.9, ease: 'power3.out' }, 0.1);
+  rv('.review-card',  { opacity: 0, y: 32,  duration: 0.8, ease: 'power3.out' }, 0.07);
+  rv('.c-item',       { opacity: 0, x: 24,  duration: 0.7, ease: 'power3.out' }, 0.1);
+  rv('.map-box',      { opacity: 0, y: 24,  duration: 0.9, ease: 'power3.out' });
+  rv('.about-imgs',   { opacity: 0, x: 40,  duration: 1,   ease: 'power3.out' });
+  rv('.about-text',   { opacity: 0, x: -40, duration: 1,   ease: 'power3.out' });
 }
 
 (async () => {
@@ -66,16 +65,9 @@ function initAnimations() {
   initContact();
 
   AOS.init({
-    duration: 800,
+    duration: 750,
     easing: 'ease-out-cubic',
     once: true,
-    offset: 60
-  });
-
-  GLightbox({
-    selector: '.glightbox',
-    touchNavigation: true,
-    loop: true,
-    autoplayVideos: false
+    offset: 64
   });
 })();

@@ -1,13 +1,18 @@
 function initTestimonials() {
-  new Swiper('.testimonials-swiper', {
-    slidesPerView: 1,
-    spaceBetween: 24,
-    loop: true,
-    autoplay: { delay: 3500, disableOnInteraction: false },
-    pagination: { el: '.testimonials-pagination', clickable: true },
-    breakpoints: {
-      768:  { slidesPerView: 2 },
-      1024: { slidesPerView: 3 }
-    }
-  });
+  /* Staggered star reveal on scroll for each review card */
+  const cards = document.querySelectorAll('.review-card');
+  if (!cards.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const stars = entry.target.querySelectorAll('.star');
+      stars.forEach((star, i) => {
+        setTimeout(() => star.classList.add('visible'), i * 80);
+      });
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.3 });
+
+  cards.forEach(card => observer.observe(card));
 }

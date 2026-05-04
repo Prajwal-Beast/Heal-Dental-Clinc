@@ -3,18 +3,20 @@ function initContact() {
     flatpickr('#apptDate', {
       minDate: 'today',
       dateFormat: 'D, d M Y',
-      disableMobile: true,
-      disable: []
+      disableMobile: true
     });
   }
 
-  const form = document.getElementById('bookForm');
+  const form = document.getElementById('bookingForm');
   if (!form) return;
+
   form.addEventListener('submit', function(e) {
     e.preventDefault();
-    const btn = this.querySelector('.f-submit');
-    btn.textContent = "Request Received — We’ll Be in Touch Soon";
-    btn.style.cssText = 'background:#2E7D32;color:#fff;cursor:default;width:100%;border:none;font-family:var(--sans);font-size:10px;letter-spacing:0.26em;text-transform:uppercase;font-weight:600;padding:18px 32px;border-radius:999px;';
+    const btn = this.querySelector('[type="submit"]');
+    btn.textContent = 'Request Received — We’ll be in touch soon';
+    btn.style.background = 'var(--leaf)';
+    btn.style.borderColor = 'var(--leaf)';
+    btn.style.cursor = 'default';
     btn.disabled = true;
   });
 }
