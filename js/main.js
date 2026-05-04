@@ -35,7 +35,7 @@ function initAnimations() {
   });
 
   rv('.stat-cell',   { opacity: 0, y: 28,  duration: 0.8, ease: 'power3.out' }, 0.1);
-  rv('.svc-card',    { opacity: 0, y: 36,  duration: 0.8, ease: 'power3.out' }, 0.07);
+  rv('.svc-row',     { opacity: 0, y: 40,  duration: 0.9, ease: 'power3.out' }, 0.06);
   rv('.team-card',   { opacity: 0, y: 40,  duration: 0.9, ease: 'power3.out' }, 0.1);
   rv('.review-card', { opacity: 0, y: 28,  duration: 0.8, ease: 'power3.out' }, 0.06);
   rv('.c-item',      { opacity: 0, x: 20,  duration: 0.7, ease: 'power3.out' }, 0.1);
