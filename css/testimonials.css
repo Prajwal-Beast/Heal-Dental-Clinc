@@ -68,26 +68,38 @@
 .star {
   font-size: 15px;
   color: #F5A623;
-  opacity: 0;
-  transform: translateY(6px);
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
-.star.visible { opacity: 1; transform: translateY(0); }
 
 .review-text {
   font-size: 14px;
-  line-height: 1.8;
+  line-height: 1.85;
   color: var(--ink-700);
   flex: 1;
 }
 .review-quote {
   font-family: var(--font-d);
-  font-size: 48px;
+  font-size: 56px;
   color: var(--sky-100);
-  line-height: 0.7;
+  line-height: 0.6;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   font-style: italic;
+  user-select: none;
+}
+.review-service-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sky);
+  background: var(--sky-100);
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 2px;
 }
 
 /* Footer with photo avatar */
