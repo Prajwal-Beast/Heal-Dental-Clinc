@@ -162,28 +162,6 @@ ul { list-style: none; }
   border-color: var(--white);
 }
 
-/* ── WHATSAPP FLOAT ─────────────────────────────── */
-.wa-float {
-  position: fixed;
-  bottom: 100px;
-  right: 28px;
-  z-index: 9999;
-  width: 54px;
-  height: 54px;
-  background: #25D366;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  box-shadow: 0 8px 24px rgba(37,211,102,.4);
-  transition: transform var(--ease-f), box-shadow var(--ease-f);
-}
-.wa-float:hover {
-  transform: scale(1.1) translateY(-4px);
-  box-shadow: 0 14px 36px rgba(37,211,102,.55);
-}
-.wa-float svg { width: 26px; height: 26px; }
 
 /* ── RESPONSIVE ─────────────────────────────────── */
 @media (max-width: 1024px) {
