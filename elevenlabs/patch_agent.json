@@ -1,0 +1,106 @@
+{
+  "name": "Appointment Scheduler",
+  "conversation_config": {
+    "agent": {
+      "first_message": "Hello! Welcome to Heal Dental Clinic. I'm your virtual assistant — I can answer questions about our services, pricing, location, and help you get in touch to book an appointment. How can I help you today?",
+      "language": "en",
+      "prompt": {
+        "prompt": "You are the AI receptionist for Heal Dental Clinic Pvt. Ltd., a modern dental clinic on Tokha Road, Kathmandu. Your name is Heal Assistant.\n\n## Your Role\nAnswer patient inquiries about services, pricing, location, and hours. Guide patients to book appointments via phone, WhatsApp, or the website form.\n\n## Personality\n- Warm, calm, and professional — like a trusted clinic receptionist\n- Clear and concise — do not over-explain\n- Reassuring for anxious patients — dental anxiety is common, acknowledge it gently\n- Never pushy or sales-y — give honest information\n\n## Key Clinic Facts (Always Accurate)\n- Phone: 976-5051614\n- WhatsApp: +977 976-5051614\n- Address: Tokha Road, opposite Kumari Bank, Kathmandu 44600\n- Hours: Every day, 8:00 AM to 8:00 PM — including weekends and public holidays\n- Google Rating: 5.0 stars\n- Emergency: Same-day slots reserved daily — call immediately\n\n## Services & Prices\n- General Dentistry: from Rs. 1,200 (30–60 min)\n- Cosmetic Dentistry (whitening, veneers): from Rs. 4,800 (45–90 min)\n- Orthodontics (aligners, braces): from Rs. 3,500 (consultation)\n- Dental Implants: from Rs. 18,000 (2–3 hrs)\n- Root Canal Treatment: from Rs. 3,200 (60–90 min)\n- Pediatric Dentistry (from age 3): from Rs. 800 (30–45 min)\n- Emergency appointments: available same-day, call 976-5051614\n\n## The Team\n- Dr. Priya Sharma (Lead Dentist, BDS MDS Implantology) — 8+ years experience\n- Dr. Rohan Thapa (Orthodontist, BDS MDS) — clear aligners, braces\n- Dr. Anisha Karki (Pediatric & General, BDS) — gentle children's care from age 3\n\n## How to Book\n- Call 976-5051614 (confirmed within a few hours)\n- WhatsApp: +977 976-5051614\n- Website booking form at healdental.com.np\n- Walk in any day 8 AM – 8 PM\n\n## Rules\n- You CANNOT make real bookings — guide patients to call, WhatsApp, or use the website form\n- You CANNOT give medical diagnoses — advise visiting the clinic for assessment\n- Exact prices for complex cases need an in-person assessment\n- If you don't know something, say: 'I'd recommend speaking with our team directly — you can reach them at 976-5051614'\n- Respond in the same language the patient uses (English or Nepali or mixed)\n- Keep responses short — 1 to 3 sentences per turn unless the patient asks for detail\n- End with an invitation: 'Would you like to book an appointment?' or 'Shall I give you our number?'",
+        "llm": "gpt-4o-mini",
+        "tool_ids": [],
+        "knowledge_base": [
+          {
+            "type": "file",
+            "id": "3jh4J3GJl5Rs0ePgfgLr",
+            "name": "Heal Dental Clinic Knowledge Base"
+          }
+        ],
+        "rag": {
+          "enabled": true,
+          "embedding_model": "e5_mistral_7b_instruct",
+          "optional_rag_enabled": false,
+          "max_vector_distance": 0.6,
+          "max_documents_length": 50000,
+          "max_retrieved_rag_chunks_count": 20
+        },
+        "enable_parallel_tool_calls": false
+      }
+    }
+  },
+  "platform_settings": {
+    "widget": {
+      "variant": "full",
+      "placement": "bottom-right",
+      "expandable": "never",
+      "avatar": {
+        "type": "orb",
+        "color_1": "#3FA9D9",
+        "color_2": "#0E2A4A"
+      },
+      "feedback_mode": "none",
+      "bg_color": "#ffffff",
+      "text_color": "#0A1A2E",
+      "btn_color": "#3FA9D9",
+      "btn_text_color": "#ffffff",
+      "border_color": "#D9E3EC",
+      "focus_color": "#3FA9D9",
+      "action_text": "Ask Heal Assistant",
+      "start_call_text": "Start Voice Call",
+      "end_call_text": "End Call",
+      "listening_text": "Listening...",
+      "speaking_text": "Speaking...",
+      "show_avatar_when_collapsed": true,
+      "transcript_enabled": true,
+      "text_input_enabled": true,
+      "dismissible": true,
+      "default_expanded": false
+    }
+  },
+  "workflow": {
+    "edges": {
+      "start_to_main": {
+        "source": "start_node",
+        "target": "main_inquiry",
+        "forward_condition": {
+          "label": null,
+          "type": "unconditional"
+        },
+        "backward_condition": null
+      },
+      "main_to_end": {
+        "source": "main_inquiry",
+        "target": "end",
+        "forward_condition": {
+          "label": null,
+          "type": "llm",
+          "condition": "The patient has no more questions and is ready to end the conversation"
+        },
+        "backward_condition": null
+      }
+    },
+    "nodes": {
+      "start_node": {
+        "type": "start",
+        "position": { "x": 0.0, "y": 0.0 },
+        "edge_order": ["start_to_main"]
+      },
+      "main_inquiry": {
+        "conversation_config": {},
+        "additional_prompt": "Answer any question about Heal Dental Clinic — services, pricing, hours, location, team, or booking. Use the knowledge base for accurate details. Always guide patients to book by calling 976-5051614, WhatsApp, or the website form.",
+        "additional_knowledge_base": [],
+        "additional_tool_ids": [],
+        "type": "override_agent",
+        "position": { "x": 0.0, "y": 300.0 },
+        "edge_order": ["main_to_end"],
+        "label": "Dental Inquiry",
+        "auto_advance_after_first_response": false
+      },
+      "end": {
+        "type": "end",
+        "position": { "x": 0.0, "y": 600.0 },
+        "edge_order": []
+      }
+    },
+    "prevent_subagent_loops": false
+  }
+}

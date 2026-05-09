@@ -165,7 +165,7 @@ ul { list-style: none; }
 /* ── WHATSAPP FLOAT ─────────────────────────────── */
 .wa-float {
   position: fixed;
-  bottom: 28px;
+  bottom: 100px;
   right: 28px;
   z-index: 9999;
   width: 54px;
