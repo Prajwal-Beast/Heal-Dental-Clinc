@@ -142,19 +142,14 @@
     const hero = document.querySelector('.hero');
     if (!hero) return;
 
-    const bg      = hero.querySelector('.hero-bg');
-    const overlay = hero.querySelector('.hero-overlay');
-    const heroLeft  = hero.querySelector('.hero-left');
-    const heroRight = hero.querySelector('.hero-right');
-    const heroTag   = hero.querySelector('.hero-tag');
-    const h1        = hero.querySelector('.hero-h1');
-    const teeth     = hero.querySelectorAll('.tooth-icon');
-    const sparks    = hero.querySelectorAll('.sp');
-    const badge     = hero.querySelector('.hero-trust-badge');
-    const orbs      = hero.querySelectorAll('.hero-orb');
+    const heroLeft   = hero.querySelector('.hero-left');
+    const heroRight  = hero.querySelector('.hero-right');
+    const heroImg    = hero.querySelector('.hero-img');
+    const floatCards = hero.querySelectorAll('.hero-float-card');
+    const orbs       = hero.querySelectorAll('.hero-orb');
 
-    let tx = 0, ty = 0;       // target
-    let cx = 0, cy = 0;       // current (lerped)
+    let tx = 0, ty = 0;
+    let cx = 0, cy = 0;
 
     function lerp(a, b, t) { return a + (b - a) * t; }
 
@@ -162,19 +157,13 @@
       cx = lerp(cx, tx, 0.055);
       cy = lerp(cy, ty, 0.055);
 
-      if (bg)       bg.style.transform      = `translate(${cx * 18}px, ${cy * 12}px) scale(1.07)`;
-      if (heroLeft) heroLeft.style.transform = `translate(${cx * -10}px, ${cy * -6}px)`;
-      if (heroRight) heroRight.style.transform = `translate(${cx * 14}px, ${cy * 9}px)`;
-      if (badge)    badge.style.transform   = `translate(${cx * -6}px, ${cy * -4}px)`;
+      if (heroImg)   heroImg.style.transform    = `scale(1.07) translate(${cx * 18}px, ${cy * 12}px)`;
+      if (heroLeft)  heroLeft.style.transform   = `translate(${cx * -8}px, ${cy * -5}px)`;
+      if (heroRight) heroRight.style.transform  = `translate(${cx * 12}px, ${cy * 8}px)`;
 
-      teeth.forEach((t, i) => {
-        const d = (i + 1) * 0.5;
-        t.style.transform = `translate(${cx * 22 * d}px, ${cy * 16 * d}px)`;
-      });
-
-      sparks.forEach((s, i) => {
-        const d = 0.3 + i * 0.1;
-        s.style.transform = `translate(${cx * 12 * d}px, ${cy * 8 * d}px)`;
+      floatCards.forEach((c, i) => {
+        const d = 0.6 + i * 0.4;
+        c.style.transform = `translate(${cx * -14 * d}px, ${cy * -10 * d}px)`;
       });
 
       orbs.forEach((o, i) => {
@@ -237,7 +226,7 @@
   function initCardTilt() {
     if (isMobile()) return;
 
-    const cards = document.querySelectorAll('.svc-card, .team-card, .review-card');
+    const cards = document.querySelectorAll('.team-card, .review-card, .hero-float-card');
 
     cards.forEach(card => {
       // Add glare layer
@@ -299,7 +288,7 @@
   function initMagneticButtons() {
     if (isMobile()) return;
 
-    document.querySelectorAll('.btn-gold, .btn-outline, .nav-cta, .btn-outline-gold').forEach(btn => {
+    document.querySelectorAll('.btn-primary, .btn-outline, .btn-outline-white, .nav-cta').forEach(btn => {
       let ox = 0, oy = 0;
 
       btn.addEventListener('mousemove', e => {
