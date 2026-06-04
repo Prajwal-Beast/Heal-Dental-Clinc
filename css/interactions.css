@@ -1,48 +1,44 @@
 /* ═══════════════════════════════════════════════════
    HEAL DENTAL — Interactive 3D Styles
+   All heavy effects are CSS-gated to pointer:fine
+   (mouse devices). Touch devices get zero overhead.
 ═══════════════════════════════════════════════════ */
 
-/* ── CUSTOM CURSOR ─────────────────────────────────── */
+/* ── CUSTOM CURSOR (mouse only) ────────────────────── */
 @media (pointer: fine) {
-  body { cursor: none !important; }
-  a, button, [role="button"], input, select, textarea { cursor: none !important; }
+  body, a, button, [role="button"], input, select, textarea {
+    cursor: none !important;
+  }
 }
 
 .cur-dot {
   position: fixed;
   top: 0; left: 0;
   width: 7px; height: 7px;
-  background: var(--gold);
+  background: var(--sky, #3FA9D9);
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
-  transition: width 0.2s, height 0.2s, background 0.2s;
   will-change: transform;
 }
-.cur-dot.cur-hover {
-  width: 5px; height: 5px;
-  background: var(--gold-l);
-}
-.cur-dot.cur-click {
-  width: 4px; height: 4px;
-  background: #fff;
-}
+.cur-dot.cur-hover  { width: 5px; height: 5px; background: var(--leaf, #7BC36A); }
+.cur-dot.cur-click  { width: 3px; height: 3px; background: #fff; }
 
 .cur-ring {
   position: fixed;
   top: 0; left: 0;
   width: 34px; height: 34px;
-  border: 1.5px solid rgba(184, 150, 90, 0.55);
+  border: 1.5px solid rgba(63, 169, 217, 0.5);
   border-radius: 50%;
   pointer-events: none;
   z-index: 99998;
-  transition: width 0.25s, height 0.25s, border-color 0.25s;
   will-change: transform;
+  transition: width .22s, height .22s, border-color .22s;
 }
 .cur-ring.cur-hover {
-  width: 48px; height: 48px;
-  border-color: rgba(184, 150, 90, 0.9);
-  background: rgba(184, 150, 90, 0.05);
+  width: 46px; height: 46px;
+  border-color: rgba(63, 169, 217, 0.9);
+  background: rgba(63, 169, 217, 0.06);
 }
 
 /* ── CURSOR SPARKLE TRAIL ──────────────────────────── */
@@ -50,7 +46,7 @@
   position: fixed;
   top: 0; left: 0;
   width: 5px; height: 5px;
-  background: var(--gold-l);
+  background: var(--sky, #3FA9D9);
   border-radius: 50%;
   pointer-events: none;
   z-index: 99997;
@@ -62,13 +58,12 @@
 .scroll-progress-bar {
   position: fixed;
   top: 0; left: 0;
-  height: 2px;
+  height: 2.5px;
   width: 0%;
-  background: linear-gradient(90deg, var(--gold), var(--gold-l), var(--gold));
+  background: linear-gradient(90deg, var(--sky, #3FA9D9), var(--leaf, #7BC36A));
   z-index: 10001;
   pointer-events: none;
-  transition: width 0.08s linear;
-  box-shadow: 0 0 8px rgba(184, 150, 90, 0.6);
+  box-shadow: 0 0 6px rgba(63, 169, 217, 0.5);
 }
 
 /* ── 3D CARD GLARE LAYER ───────────────────────────── */
@@ -78,84 +73,52 @@
   border-radius: inherit;
   pointer-events: none;
   z-index: 10;
-  transition: background 0.1s;
 }
 
-/* ── CARD 3D LIFT SHADOW ───────────────────────────── */
-.team-card,
-.review-card,
-.hero-float-card {
-  transform-style: preserve-3d;
-  will-change: transform;
-  transition: box-shadow 0.4s;
-}
-.team-card:hover {
-  box-shadow: 0 32px 64px rgba(14, 42, 74, 0.22);
-}
-.review-card:hover {
-  box-shadow: 0 20px 48px rgba(14, 42, 74, 0.16);
+/* ── CARD will-change (mouse devices only) ─────────── */
+@media (pointer: fine) {
+  .team-card,
+  .review-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  .btn-primary,
+  .btn-outline,
+  .btn-outline-white { will-change: transform; }
+  .hero-img { will-change: transform; }
 }
 
-/* ── BLUR REVEAL ENTRANCE ──────────────────────────── */
-.blur-pending {
-  opacity: 0;
-  filter: blur(8px);
-  transform: translateY(20px);
-  transition: opacity 0.7s ease, filter 0.7s ease, transform 0.7s ease;
-}
-.blur-revealed {
-  opacity: 1 !important;
-  filter: blur(0) !important;
-  transform: translateY(0) !important;
-}
+/* ── HERO ORB ──────────────────────────────────────── */
+.hero-orb { mix-blend-mode: screen; }
 
-/* ── MAGNETIC BUTTON TRANSITION ────────────────────── */
-.btn-primary,
-.btn-outline,
-.btn-outline-white {
-  will-change: transform;
-}
-
-/* ── HERO ORB (injected by JS) ─────────────────────── */
-.hero-orb {
-  will-change: transform;
-  mix-blend-mode: screen;
-}
-
-/* ── HERO BG smooth transition ─────────────────────── */
-.hero-bg {
-  will-change: transform;
-  transition: transform 0.1s linear;
-}
-.hero-left,
-.hero-right {
-  will-change: transform;
-}
-.hero-trust-badge {
-  will-change: transform;
-}
-
-/* ── DISABLE ALL EFFECTS ON TOUCH / MOBILE ─────────── */
-@media (max-width: 768px), (pointer: coarse) {
+/* ── HARD DISABLE everything on touch / mobile ─────── */
+@media (pointer: coarse), (hover: none) {
   .cur-dot,
   .cur-ring,
-  .trail-spark { display: none !important; }
+  .trail-spark,
+  .scroll-progress-bar,
+  .card-glare,
+  .hero-orb { display: none !important; }
 
-  .blur-pending {
-    opacity: 1;
-    filter: none;
-    transform: none;
-    transition: none;
-  }
-
-  .hero-bg,
+  .hero-img,
   .hero-left,
   .hero-right,
-  .hero-trust-badge,
-  .tooth-icon,
-  .hero-orb { transform: none !important; }
-
-  .svc-card,
+  .hero-float-card,
   .team-card,
-  .review-card { transform: none !important; }
+  .review-card,
+  .btn-primary,
+  .btn-outline,
+  .btn-outline-white {
+    transform: none !important;
+    will-change: auto !important;
+    filter: none !important;
+  }
+
+  .blur-pending,
+  .fade-pending {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }

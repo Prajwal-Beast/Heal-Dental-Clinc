@@ -1,20 +1,27 @@
 /* ═══════════════════════════════════════════════════
    HEAL DENTAL — Interactive 3D Experience
    Cursor · Parallax · Tilt · Magnets · Trail · Orbs
+   All effects are HARD-DISABLED on touch/mobile.
 ═══════════════════════════════════════════════════ */
 
 (function () {
   'use strict';
 
-  const isMobile = () => {
-    const w = window.innerWidth || document.documentElement.clientWidth || screen.width || 1280;
-    return w <= 768 || ('ontouchstart' in window && w <= 768);
-  };
+  // ── RELIABLE mobile check (works before DOM is ready) ──
+  // matchMedia is synchronous and always accurate — unlike
+  // window.innerWidth which can be 0 during script parse.
+  const IS_TOUCH = window.matchMedia('(pointer: coarse)').matches
+                || window.matchMedia('(hover: none)').matches
+                || ('ontouchstart' in window);
+
+  // Hard exit on any touch device — nothing runs at all
+  if (IS_TOUCH) {
+    window.initInteractions = function () {};
+    return;
+  }
 
   /* ── 1. CUSTOM CURSOR ─────────────────────────────── */
   function initCursor() {
-    if (isMobile()) return;
-
     const dot  = document.createElement('div');
     const ring = document.createElement('div');
     dot.className  = 'cur-dot';
@@ -23,8 +30,8 @@
 
     let mx = -200, my = -200, rx = -200, ry = -200;
     let rvx = 0, rvy = 0;
+    let rafId;
 
-    // Smoothly lag the ring behind the dot
     function tickCursor() {
       rvx += (mx - rx) * 0.14;
       rvy += (my - ry) * 0.14;
@@ -33,31 +40,25 @@
       rx += rvx;
       ry += rvy;
 
-      dot.style.transform  = `translate(${mx}px, ${my}px) translate(-50%,-50%)`;
-      ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
+      dot.style.transform  = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
 
-      // Stretch the ring based on velocity
-      const speed = Math.sqrt(rvx * rvx + rvy * rvy);
-      const angle = Math.atan2(rvy, rvx) * (180 / Math.PI);
+      const speed   = Math.sqrt(rvx * rvx + rvy * rvy);
+      const angle   = Math.atan2(rvy, rvx) * (180 / Math.PI);
       const stretch = Math.min(speed * 0.18, 0.6);
-      ring.style.transform += ` rotate(${angle}deg) scaleX(${1 + stretch}) scaleY(${1 - stretch * 0.4})`;
+      ring.style.transform =
+        `translate(${rx}px,${ry}px) translate(-50%,-50%)` +
+        ` rotate(${angle}deg) scaleX(${1 + stretch}) scaleY(${1 - stretch * 0.4})`;
 
-      requestAnimationFrame(tickCursor);
+      rafId = requestAnimationFrame(tickCursor);
     }
-    tickCursor();
+    rafId = requestAnimationFrame(tickCursor);
 
     document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
 
-    // States: hover → expand ring, click → shrink dot
     document.addEventListener('mouseover', e => {
-      const el = e.target.closest('a, button, .svc-card, .team-card, .review-card, input, select, textarea');
-      if (el) {
-        ring.classList.add('cur-hover');
-        dot.classList.add('cur-hover');
-      } else {
-        ring.classList.remove('cur-hover');
-        dot.classList.remove('cur-hover');
-      }
+      const el = e.target.closest('a, button, input, select, textarea, .team-card, .review-card');
+      ring.classList.toggle('cur-hover', !!el);
+      dot.classList.toggle('cur-hover', !!el);
     });
     document.addEventListener('mousedown', () => dot.classList.add('cur-click'));
     document.addEventListener('mouseup',   () => dot.classList.remove('cur-click'));
@@ -65,60 +66,45 @@
 
   /* ── 2. CURSOR SPARKLE TRAIL ──────────────────────── */
   function initSparkleTrail() {
-    if (isMobile()) return;
-
-    const pool = [];
-    const POOL_SIZE = 22;
-
-    for (let i = 0; i < POOL_SIZE; i++) {
+    const POOL_SIZE = 18;
+    const pool = Array.from({ length: POOL_SIZE }, () => {
       const sp = document.createElement('div');
       sp.className = 'trail-spark';
       document.body.appendChild(sp);
-      pool.push({ el: sp, active: false });
-    }
+      return { el: sp, active: false };
+    });
 
-    let lastX = 0, lastY = 0, frameCount = 0;
+    let lastX = 0, lastY = 0, frame = 0;
 
     document.addEventListener('mousemove', e => {
-      frameCount++;
-      if (frameCount % 3 !== 0) return; // throttle
-
-      const dx = e.clientX - lastX;
-      const dy = e.clientY - lastY;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 8) return;
-
-      lastX = e.clientX;
-      lastY = e.clientY;
+      frame++;
+      if (frame % 3 !== 0) return;
+      const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
+      if (dist < 10) return;
+      lastX = e.clientX; lastY = e.clientY;
 
       const spark = pool.find(s => !s.active);
       if (!spark) return;
-
       spark.active = true;
-      const size = 3 + Math.random() * 5;
-      const angle = Math.random() * 360;
-      const travel = 18 + Math.random() * 28;
-      const rad = angle * Math.PI / 180;
-      const tx = Math.cos(rad) * travel;
-      const ty = Math.sin(rad) * travel;
 
-      spark.el.style.cssText = `
-        left: ${e.clientX}px; top: ${e.clientY}px;
-        width: ${size}px; height: ${size}px;
-        opacity: 1;
-        transform: translate(-50%,-50%) translate(0,0) scale(1);
-      `;
+      const size   = 3 + Math.random() * 4;
+      const angle  = Math.random() * Math.PI * 2;
+      const travel = 16 + Math.random() * 24;
+      const tx = Math.cos(angle) * travel;
+      const ty = Math.sin(angle) * travel;
+
+      spark.el.style.cssText =
+        `left:${e.clientX}px;top:${e.clientY}px;` +
+        `width:${size}px;height:${size}px;opacity:1;` +
+        `transform:translate(-50%,-50%) scale(1);transition:none;`;
 
       requestAnimationFrame(() => {
-        spark.el.style.transition = 'transform 0.5s ease-out, opacity 0.5s ease-out';
+        spark.el.style.transition = 'transform 0.48s ease-out, opacity 0.48s ease-out';
         spark.el.style.transform  = `translate(-50%,-50%) translate(${tx}px,${ty}px) scale(0)`;
         spark.el.style.opacity    = '0';
       });
 
-      setTimeout(() => {
-        spark.el.style.transition = '';
-        spark.active = false;
-      }, 520);
+      setTimeout(() => { spark.el.style.transition = ''; spark.active = false; }, 500);
     });
   }
 
@@ -128,17 +114,21 @@
     bar.className = 'scroll-progress-bar';
     document.body.prepend(bar);
 
+    let ticking = false;
     window.addEventListener('scroll', () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-      bar.style.width = pct + '%';
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const max = document.documentElement.scrollHeight - window.innerHeight;
+          bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+          ticking = false;
+        });
+        ticking = true;
+      }
     }, { passive: true });
   }
 
   /* ── 4. HERO 3D PARALLAX ─────────────────────────── */
   function initHeroParallax() {
-    if (isMobile()) return;
-
     const hero = document.querySelector('.hero');
     if (!hero) return;
 
@@ -148,8 +138,7 @@
     const floatCards = hero.querySelectorAll('.hero-float-card');
     const orbs       = hero.querySelectorAll('.hero-orb');
 
-    let tx = 0, ty = 0;
-    let cx = 0, cy = 0;
+    let tx = 0, ty = 0, cx = 0, cy = 0;
 
     function lerp(a, b, t) { return a + (b - a) * t; }
 
@@ -157,18 +146,18 @@
       cx = lerp(cx, tx, 0.055);
       cy = lerp(cy, ty, 0.055);
 
-      if (heroImg)   heroImg.style.transform    = `scale(1.07) translate(${cx * 18}px, ${cy * 12}px)`;
-      if (heroLeft)  heroLeft.style.transform   = `translate(${cx * -8}px, ${cy * -5}px)`;
-      if (heroRight) heroRight.style.transform  = `translate(${cx * 12}px, ${cy * 8}px)`;
+      if (heroImg)   heroImg.style.transform   = `scale(1.07) translate(${cx * 16}px,${cy * 10}px)`;
+      if (heroLeft)  heroLeft.style.transform  = `translate(${cx * -7}px,${cy * -4}px)`;
+      if (heroRight) heroRight.style.transform = `translate(${cx * 10}px,${cy * 6}px)`;
 
       floatCards.forEach((c, i) => {
-        const d = 0.6 + i * 0.4;
-        c.style.transform = `translate(${cx * -14 * d}px, ${cy * -10 * d}px)`;
+        const d = 0.5 + i * 0.35;
+        c.style.transform = `translate(${cx * -12 * d}px,${cy * -8 * d}px)`;
       });
 
       orbs.forEach((o, i) => {
-        const d = 0.18 + i * 0.08;
-        o.style.transform = `translate(${cx * 30 * d}px, ${cy * 20 * d}px)`;
+        const d = 0.15 + i * 0.07;
+        o.style.transform = `translate(${cx * 28 * d}px,${cy * 18 * d}px)`;
       });
 
       requestAnimationFrame(tick);
@@ -176,9 +165,9 @@
     tick();
 
     hero.addEventListener('mousemove', e => {
-      const rect = hero.getBoundingClientRect();
-      tx = (e.clientX - rect.left) / rect.width  - 0.5;
-      ty = (e.clientY - rect.top)  / rect.height - 0.5;
+      const r = hero.getBoundingClientRect();
+      tx = (e.clientX - r.left) / r.width  - 0.5;
+      ty = (e.clientY - r.top)  / r.height - 0.5;
     });
     hero.addEventListener('mouseleave', () => { tx = 0; ty = 0; });
   }
@@ -188,48 +177,34 @@
     const hero = document.querySelector('.hero');
     if (!hero) return;
 
-    const orbs = [
-      { x: '18%',  y: '22%', size: 340, hue: '184 150 90' },
-      { x: '72%',  y: '58%', size: 280, hue: '180 140 80' },
-      { x: '88%',  y: '18%', size: 200, hue: '200 165 100' },
-    ];
-
-    orbs.forEach((o, i) => {
+    [
+      { x: '15%', y: '20%', size: 320, r: 63, g: 169, b: 217 },
+      { x: '70%', y: '55%', size: 260, r: 50, g: 140, b: 190 },
+      { x: '85%', y: '15%', size: 190, r: 80, g: 180, b: 220 },
+    ].forEach((o, i) => {
       const el = document.createElement('div');
       el.className = 'hero-orb';
-      el.style.cssText = `
-        position:absolute;
-        left:${o.x}; top:${o.y};
-        width:${o.size}px; height:${o.size}px;
-        border-radius:50%;
-        background:radial-gradient(circle, rgba(${o.hue}, 0.13) 0%, transparent 70%);
-        pointer-events:none;
-        z-index:3;
-        filter:blur(2px);
-        animation: orbFloat${i} ${7 + i * 2.5}s ease-in-out infinite;
-        will-change: transform;
-      `;
+      el.style.cssText =
+        `position:absolute;left:${o.x};top:${o.y};` +
+        `width:${o.size}px;height:${o.size}px;border-radius:50%;` +
+        `background:radial-gradient(circle,rgba(${o.r},${o.g},${o.b},0.11) 0%,transparent 70%);` +
+        `pointer-events:none;z-index:1;` +
+        `animation:orbFloat${i} ${7 + i * 2.5}s ease-in-out infinite;` +
+        `will-change:transform;`;
       hero.appendChild(el);
     });
 
-    // Inject keyframes
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes orbFloat0 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(18px,-22px)} }
-      @keyframes orbFloat1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-14px,18px)} }
-      @keyframes orbFloat2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(10px,-14px)} }
-    `;
-    document.head.appendChild(style);
+    const s = document.createElement('style');
+    s.textContent =
+      `@keyframes orbFloat0{0%,100%{transform:translate(0,0)}50%{transform:translate(16px,-20px)}}` +
+      `@keyframes orbFloat1{0%,100%{transform:translate(0,0)}50%{transform:translate(-12px,16px)}}` +
+      `@keyframes orbFloat2{0%,100%{transform:translate(0,0)}50%{transform:translate(9px,-12px)}}`;
+    document.head.appendChild(s);
   }
 
   /* ── 6. 3D CARD TILT + GLARE ──────────────────────── */
   function initCardTilt() {
-    if (isMobile()) return;
-
-    const cards = document.querySelectorAll('.team-card, .review-card, .hero-float-card');
-
-    cards.forEach(card => {
-      // Add glare layer
+    document.querySelectorAll('.team-card, .review-card').forEach(card => {
       const glare = document.createElement('div');
       glare.className = 'card-glare';
       card.style.position = 'relative';
@@ -237,153 +212,116 @@
 
       let rx = 0, ry = 0, gx = 50, gy = 50;
       let trx = 0, try_ = 0, tgx = 50, tgy = 50;
-      let animating = false;
-      let inside = false;
+      let rafId = null, inside = false;
 
       function lerp(a, b, t) { return a + (b - a) * t; }
 
       function tick() {
-        if (!inside && Math.abs(rx) < 0.05 && Math.abs(ry) < 0.05) {
-          animating = false;
+        if (!inside && Math.abs(rx) < 0.08 && Math.abs(ry) < 0.08) {
+          card.style.transform = '';
+          glare.style.background = '';
+          rafId = null;
           return;
         }
         rx = lerp(rx, trx, 0.12);
         ry = lerp(ry, try_, 0.12);
         gx = lerp(gx, tgx, 0.12);
         gy = lerp(gy, tgy, 0.12);
-
-        card.style.transform  = `perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(8px)`;
-        glare.style.background = `radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,0.12) 0%, transparent 65%)`;
-
-        if (!inside) { trx = 0; try_ = 0; }
-        requestAnimationFrame(tick);
+        card.style.transform  = `perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(6px)`;
+        glare.style.background = `radial-gradient(circle at ${gx}% ${gy}%,rgba(255,255,255,0.11) 0%,transparent 60%)`;
+        rafId = requestAnimationFrame(tick);
       }
 
       card.addEventListener('mouseenter', () => {
         inside = true;
-        if (!animating) { animating = true; tick(); }
+        if (!rafId) rafId = requestAnimationFrame(tick);
       });
-
       card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width  - 0.5;
-        const y = (e.clientY - rect.top)  / rect.height - 0.5;
-        trx  = -y * 14;
-        try_ =  x * 14;
-        tgx  = (e.clientX - rect.left) / rect.width  * 100;
-        tgy  = (e.clientY - rect.top)  / rect.height * 100;
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width  - 0.5;
+        const y = (e.clientY - r.top)  / r.height - 0.5;
+        trx = -y * 12; try_ = x * 12;
+        tgx = (x + 0.5) * 100; tgy = (y + 0.5) * 100;
       });
-
       card.addEventListener('mouseleave', () => {
-        inside = false;
-        trx = 0; try_ = 0;
-        card.style.transition = 'transform 0.6s cubic-bezier(0.23,1,0.32,1), box-shadow 0.4s';
-        card.style.transform  = '';
-        setTimeout(() => { card.style.transition = ''; }, 620);
+        inside = false; trx = 0; try_ = 0;
       });
     });
   }
 
   /* ── 7. MAGNETIC BUTTONS ──────────────────────────── */
   function initMagneticButtons() {
-    if (isMobile()) return;
-
-    document.querySelectorAll('.btn-primary, .btn-outline, .btn-outline-white, .nav-cta').forEach(btn => {
-      let ox = 0, oy = 0;
-
+    document.querySelectorAll('.btn-primary, .btn-outline, .btn-outline-white').forEach(btn => {
       btn.addEventListener('mousemove', e => {
-        const rect = btn.getBoundingClientRect();
-        const x = (e.clientX - (rect.left + rect.width  / 2)) * 0.35;
-        const y = (e.clientY - (rect.top  + rect.height / 2)) * 0.45;
-        ox = x; oy = y;
-        btn.style.transform = `translate(${x}px, ${y}px)`;
+        const r = btn.getBoundingClientRect();
+        const x = (e.clientX - (r.left + r.width  / 2)) * 0.3;
+        const y = (e.clientY - (r.top  + r.height / 2)) * 0.38;
+        btn.style.transform = `translate(${x}px,${y}px)`;
       });
-
       btn.addEventListener('mouseleave', () => {
-        btn.style.transition = 'transform 0.5s cubic-bezier(0.23,1,0.32,1)';
+        btn.style.transition = 'transform 0.45s cubic-bezier(0.23,1,0.32,1)';
         btn.style.transform  = '';
-        setTimeout(() => { btn.style.transition = ''; }, 520);
+        setTimeout(() => { btn.style.transition = ''; }, 460);
       });
     });
   }
 
-  /* ── 8. TEXT SCRAMBLE (hero h1) ───────────────────── */
+  /* ── 8. TEXT SCRAMBLE (hero h1) — desktop only ────── */
   function initTextScramble() {
     const el = document.querySelector('.hero-h1');
     if (!el) return;
 
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*';
+    const chars   = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const original = el.innerHTML;
-    const plain = el.textContent;
-
+    const plain    = el.textContent;
     let frame = 0;
-    const totalFrames = 36;
+    const FRAMES = 28;
 
-    function randomChar() {
-      return chars[Math.floor(Math.random() * chars.length)];
-    }
-
-    function scramble() {
-      let out = '';
-      const progress = frame / totalFrames;
+    (function scramble() {
+      const progress   = frame / FRAMES;
       const revealUpto = Math.floor(progress * plain.length);
+      let out = '';
 
       for (let i = 0; i < plain.length; i++) {
-        if (plain[i] === '\n' || plain[i] === ' ') { out += plain[i]; continue; }
-        if (i < revealUpto) {
-          out += plain[i];
-        } else if (Math.random() < 0.4) {
-          out += `<span style="color:rgba(184,150,90,0.5)">${randomChar()}</span>`;
-        } else {
-          out += randomChar();
-        }
+        const ch = plain[i];
+        if (ch === '\n' || ch === ' ') { out += ch; continue; }
+        out += i < revealUpto
+          ? ch
+          : `<span style="opacity:.35">${chars[Math.floor(Math.random() * chars.length)]}</span>`;
       }
 
-      // Restore the em-wrapped italic for "Healing"
-      el.textContent = '';
-      el.innerHTML = out.replace(/Healing/g, '<em>Healing</em>');
-
+      el.innerHTML = out.replace(/Dental/g, '<em>Dental</em>');
       frame++;
-      if (frame <= totalFrames) {
-        setTimeout(scramble, 42);
-      } else {
-        el.innerHTML = original;
-      }
-    }
-
-    // Slight delay so user sees the page first
-    setTimeout(scramble, 600);
+      if (frame <= FRAMES) setTimeout(scramble, 38);
+      else el.innerHTML = original;
+    })();
   }
 
-  /* ── 9. SECTION HEADER HIGHLIGHT LINE ────────────── */
-  function initSectionHighlights() {
-    // Add animated underline to hovered nav links
-    document.querySelectorAll('.nav-links a').forEach(a => {
-      a.addEventListener('mouseenter', () => a.style.setProperty('--uw', '100%'));
-      a.addEventListener('mouseleave', () => a.style.setProperty('--uw', '0%'));
-    });
-  }
+  /* ── 9. FADE-IN ENTRANCE (no blur — uses opacity+Y) ── */
+  function initFadeReveal() {
+    const style = document.createElement('style');
+    style.textContent =
+      `.fade-pending{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}` +
+      `.fade-revealed{opacity:1!important;transform:translateY(0)!important}`;
+    document.head.appendChild(style);
 
-  /* ── 10. SMOOTH SECTION BLUR-IN ──────────────────── */
-  function initBlurReveal() {
-    const opts = { threshold: 0.12 };
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
-          e.target.classList.add('blur-revealed');
+          e.target.classList.add('fade-revealed');
           observer.unobserve(e.target);
         }
       });
-    }, opts);
+    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.svc-card, .team-card, .about-stat-item').forEach(el => {
-      el.classList.add('blur-pending');
+    document.querySelectorAll('.team-card, .review-card').forEach(el => {
+      el.classList.add('fade-pending');
       observer.observe(el);
     });
   }
 
   /* ── INIT ALL ─────────────────────────────────────── */
-  function initInteractions() {
+  window.initInteractions = function () {
     initScrollProgress();
     initHeroOrbs();
     initCursor();
@@ -391,13 +329,8 @@
     initHeroParallax();
     initCardTilt();
     initMagneticButtons();
-    initBlurReveal();
-
-    // Scramble after sections load (slight extra delay)
-    setTimeout(initTextScramble, 300);
-  }
-
-  // Expose globally so main.js can call it after sections load
-  window.initInteractions = initInteractions;
+    initFadeReveal();
+    setTimeout(initTextScramble, 400);
+  };
 
 })();
