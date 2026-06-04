@@ -1,0 +1,163 @@
+/* ═══════════════════════════════════════════════════
+   HEAL DENTAL — Interactive 3D Styles
+═══════════════════════════════════════════════════ */
+
+/* ── CUSTOM CURSOR ─────────────────────────────────── */
+@media (pointer: fine) {
+  body { cursor: none !important; }
+  a, button, [role="button"], input, select, textarea { cursor: none !important; }
+}
+
+.cur-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 7px; height: 7px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transition: width 0.2s, height 0.2s, background 0.2s;
+  will-change: transform;
+}
+.cur-dot.cur-hover {
+  width: 5px; height: 5px;
+  background: var(--gold-l);
+}
+.cur-dot.cur-click {
+  width: 4px; height: 4px;
+  background: #fff;
+}
+
+.cur-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 34px; height: 34px;
+  border: 1.5px solid rgba(184, 150, 90, 0.55);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transition: width 0.25s, height 0.25s, border-color 0.25s;
+  will-change: transform;
+}
+.cur-ring.cur-hover {
+  width: 48px; height: 48px;
+  border-color: rgba(184, 150, 90, 0.9);
+  background: rgba(184, 150, 90, 0.05);
+}
+
+/* ── CURSOR SPARKLE TRAIL ──────────────────────────── */
+.trail-spark {
+  position: fixed;
+  top: 0; left: 0;
+  width: 5px; height: 5px;
+  background: var(--gold-l);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99997;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* ── SCROLL PROGRESS BAR ───────────────────────────── */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-l), var(--gold));
+  z-index: 10001;
+  pointer-events: none;
+  transition: width 0.08s linear;
+  box-shadow: 0 0 8px rgba(184, 150, 90, 0.6);
+}
+
+/* ── 3D CARD GLARE LAYER ───────────────────────────── */
+.card-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 10;
+  transition: background 0.1s;
+}
+
+/* ── CARD 3D LIFT SHADOW ───────────────────────────── */
+.svc-card,
+.team-card,
+.review-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: box-shadow 0.4s;
+}
+.svc-card:hover,
+.team-card:hover {
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(184, 150, 90, 0.18);
+}
+.review-card:hover {
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+}
+
+/* ── BLUR REVEAL ENTRANCE ──────────────────────────── */
+.blur-pending {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, filter 0.7s ease, transform 0.7s ease;
+}
+.blur-revealed {
+  opacity: 1 !important;
+  filter: blur(0) !important;
+  transform: translateY(0) !important;
+}
+
+/* ── MAGNETIC BUTTON TRANSITION ────────────────────── */
+.btn-gold,
+.btn-outline,
+.nav-cta,
+.btn-outline-gold {
+  will-change: transform;
+}
+
+/* ── HERO ORB (injected by JS) ─────────────────────── */
+.hero-orb {
+  will-change: transform;
+  mix-blend-mode: screen;
+}
+
+/* ── HERO BG smooth transition ─────────────────────── */
+.hero-bg {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+.hero-left,
+.hero-right {
+  will-change: transform;
+}
+.hero-trust-badge {
+  will-change: transform;
+}
+
+/* ── DISABLE ALL EFFECTS ON TOUCH / MOBILE ─────────── */
+@media (max-width: 768px), (pointer: coarse) {
+  .cur-dot,
+  .cur-ring,
+  .trail-spark { display: none !important; }
+
+  .blur-pending {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-bg,
+  .hero-left,
+  .hero-right,
+  .hero-trust-badge,
+  .tooth-icon,
+  .hero-orb { transform: none !important; }
+
+  .svc-card,
+  .team-card,
+  .review-card { transform: none !important; }
+}

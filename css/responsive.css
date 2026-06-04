@@ -1,0 +1,122 @@
+/* ── RESPONSIVE — loads last so it overrides all section CSS ── */
+
+/* ── TABLET (≤ 1024px) ────────────────────────────── */
+@media (max-width: 1024px) {
+  .s-inner { padding: 0 32px; }
+
+  /* Philosophy */
+  .philosophy .inner { grid-template-columns: 1fr; gap: 52px; }
+  .phil-img-wrap { height: 380px; }
+
+  /* Services */
+  .svc-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Team */
+  .team-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Booking */
+  .booking-grid { grid-template-columns: 1fr; gap: 40px; }
+
+  /* Contact */
+  .contact-grid { grid-template-columns: 1fr; gap: 52px; }
+
+  /* About stats */
+  .about-stats-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── MOBILE (≤ 768px) ─────────────────────────────── */
+@media (max-width: 768px) {
+  /* Nav */
+  .nav { padding: 18px 20px; }
+  .nav.scrolled { padding: 14px 20px; }
+
+  /* Hero */
+  .hero-body { grid-template-columns: 1fr; padding: 0 20px 100px; gap: 24px; }
+  .hero-h1 { font-size: clamp(42px, 12vw, 68px); }
+  .hero-right { align-items: flex-start; }
+  .hero-desc { text-align: left; max-width: 100%; font-size: 14px; }
+  .hero-btns { flex-wrap: wrap; gap: 12px; }
+
+  /* Stat bar */
+  .stat-bar { grid-template-columns: 1fr 1fr; }
+  .stat-cell { border-right: none; border-bottom: 1px solid rgba(184,150,90,0.09); padding: 24px 20px; }
+  .stat-n { font-size: 40px; }
+
+  /* Philosophy */
+  .philosophy { padding: 72px 20px; }
+  .philosophy .inner { grid-template-columns: 1fr; gap: 40px; }
+  .phil-img-wrap { height: 300px; }
+
+  /* Gallery */
+  .gallery { padding: 72px 20px; }
+  .gal-grid { grid-template-columns: 1fr; margin: 40px auto 0; gap: 14px; }
+  .gal-main { height: 260px; }
+  .gal-col { flex-direction: row; gap: 14px; }
+  .gal-sm { height: 160px; }
+
+  /* About stats strip */
+  .about-stats-strip { padding: 60px 20px; }
+  .about-stats-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Services */
+  .services { padding: 72px 20px; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .svc-card { padding: 36px 28px; }
+
+  /* Team */
+  .team { padding: 72px 20px; }
+  .team-grid { grid-template-columns: 1fr; max-width: 420px; margin: 40px auto 0; }
+
+  /* Reviews */
+  .reviews { padding: 72px 20px; }
+  .reviews-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+
+  /* Booking */
+  .booking { padding: 72px 20px; }
+  .booking-grid { grid-template-columns: 1fr; margin: 40px auto 0; gap: 32px; }
+  .form-wrap { padding: 32px 20px; }
+  .form-h { font-size: 28px; }
+
+  /* Contact */
+  .contact { padding: 72px 20px; }
+  .contact-grid { grid-template-columns: 1fr; margin: 40px auto 0; gap: 40px; }
+  .c-val { font-size: 17px; }
+  .map-box { height: 320px; }
+
+  /* Footer */
+  .footer { padding: 48px 20px 32px; }
+  .footer-top { flex-direction: column; gap: 24px; }
+  .footer-links { gap: 20px; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 10px; }
+
+  /* Section title */
+  .section-title { font-size: clamp(32px, 9vw, 52px); }
+}
+
+/* ── SMALL MOBILE (≤ 480px) ───────────────────────── */
+@media (max-width: 480px) {
+  .stat-bar { grid-template-columns: 1fr; }
+  .stat-cell { border-bottom: 1px solid rgba(184,150,90,0.09); }
+  .hero-body { padding: 0 16px 80px; }
+  .hero-btns { flex-direction: column; align-items: flex-start; }
+  .gal-col { flex-direction: column; }
+  .gal-sm { height: 200px; }
+  .about-stats-grid { grid-template-columns: 1fr; }
+  .about-stats-strip { padding: 48px 16px; }
+  .philosophy { padding: 60px 16px; }
+  .gallery { padding: 60px 16px; }
+  .services { padding: 60px 16px; }
+  .svc-card { padding: 28px 20px; }
+  .team { padding: 60px 16px; }
+  .reviews { padding: 60px 16px; }
+  .reviews-rating-badge { padding: 14px 18px; gap: 12px; }
+  .badge-score { font-size: 38px; }
+  .booking { padding: 60px 16px; }
+  .form-wrap { padding: 28px 16px; }
+  .contact { padding: 60px 16px; }
+  .footer { padding: 40px 16px 28px; }
+  .wa-float { width: 50px; height: 50px; bottom: 20px; right: 16px; }
+  .wa-float svg { width: 22px; height: 22px; }
+  .hero-trust-badge { display: none; }
+  .scroll-hint { display: none; }
+}

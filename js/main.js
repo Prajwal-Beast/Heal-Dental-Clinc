@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAnimations();
   initTestimonials();
   initContact();
+  if (typeof initInteractions === 'function') initInteractions();
 
   AOS.init({
     duration: 700,
